@@ -1,7 +1,7 @@
 ardunav
 =======
 
-Open Source AHRS Development platform for testing Dead Reckoning and AHRS Algorithms designed specifically for college students
+ArduNav is an Open Source AHRS Development platform for testing Dead Reckoning and AHRS Algorithms designed specifically for college students
  
 An extremely low-cost, simple and yet accurate tool to create your own AHRS and run your sensor-fusion algorithms in Arduino Due using the following sensors - MPU6050 (accelerometer and gyroscopes), HMC 5883L (magnetometer) and NEO-6M GPS module. The ardunav also includes a HC-05 Bluetooth module to transmit data over Bluetooth to a nearby ground station. 
 
