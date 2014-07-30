@@ -118,8 +118,7 @@ void init_euler_EKF()
 	R_gyro = eye33; R_gyro *= 1;R_gyro(3,3)=0.05;
 	Q_gyro = eye33; Q_gyro *= 0.5;
 	gyro_bias.setZero(3);
-//        mag_bias<<-117,-233,-35.8;
-        mag_bias<<-87.934429781140720,-180.4859983546638,88.433885777505620;
+	mag_bias<<-87.934429781140720,-180.4859983546638,88.433885777505620;
         acc_scale<<kx,0,0,0,ky,0,0,0,kz;
         acc_bias<<bx,by,bz;
 
@@ -162,11 +161,6 @@ void get_bias_est()
   int bias_count=0,bias_count_max=1000;
   while(bias_count<bias_count_max)
   {
-//    tnow=millis();
-//    dt=((double)(tnow-tprev))/1000;
-//    tprev=tnow;
-//    Serial.print("dt=");Serial.println(dt,4);
-    
     accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
     acc[0]=((double)ay)*scale_factor_acc;acc[1]=((double)ax)*scale_factor_acc;acc[2]=-((double)az)*scale_factor_acc;
     gyro[0]=((double)gy)*scale_factor_gyro;gyro[1]=((double)gx)*scale_factor_gyro;gyro[2]=-((double)gz)*scale_factor_gyro;
@@ -195,14 +189,7 @@ void setup() {
     
     digitalWrite(46,LOW);
     digitalWrite(50,LOW);
-//    pinMode(22,OUTPUT);
-//    pinMode(23,OUTPUT);
-//    pinMode(24,OUTPUT);
-//    pinMode(25,OUTPUT);
-//    digitalWrite(22,HIGH);
-//    digitalWrite(23,HIGH);
-//    digitalWrite(24,HIGH);
-//    digitalWrite(25,HIGH);
+ 
     Serial.begin(115200);
     Serial2.begin(115200);
     
@@ -272,38 +259,26 @@ void loop() {
 //     acc[0]=kx*(acc[0]-bx);
 //     acc[1]=ky*(acc[1]-by);
 //     acc[2]=kz*(acc[2]-bz);
-     
-//     cmps[0]=((double)mx-(mx_max+mx_min)/2)/(mx_max-mx_min);
-//     cmps[1]=((double)my-(my_max+my_min)/2)/(my_max-my_min);
-//     cmps[2]=((double)mz-(mz_max+mz_min)/2)/(mz_max-mz_min);
-     
+
      cmps[0]=-(((double)mx)-mag_bias[0]);
      cmps[1]= (((double)my)-mag_bias[1]);
      cmps[2]=-(((double)mz)-mag_bias[2]);
      
      
      
-     //------------------------------------Attitude Time Update--------------------------------------------------------------
-
+        //------------------------------------Attitude Time Update--------------------------------------------------------------
+ 
 	get_T_gyro();
 	omega = T_gyro*gyro;
 	euler += dt*omega;
 	get_discrete_F_gyro();
 	phi_gyro = (eye33 + F_gyro*dt);
 	P_gyro = phi_gyro*P_gyro*phi_gyro.transpose() + Q_gyro;
-
-	/*
-	std::cout << P_gyro << std::endl;
-	std::cout << std::endl;
-	std::cout << omega << std::endl;
-	std::cout << std::endl;
-	std::cout << T_gyro << std::endl;
-	std::cout << std::endl;
-	*/
-
+	
+	
 	//------------------------------------Attitude Measurement Update--------------------------------------------------------------
-        
-        
+	
+	
 	double acc_check = abs(acc.norm() / g - 1);
 	if (acc_check<epsilon_acc)
 	{
@@ -315,17 +290,18 @@ void loop() {
 		phi_acc = euler[0];
 		theta_acc = euler[1];
 	}
-
+	
 	get_T_magno();
 	m = T_magno*cmps;
 	psi_magno = -atan2(m(1), m(0));
 	y_eul << phi_acc, theta_acc, psi_magno;
-
+	
 	temp33 = H_gyro*P_gyro*H_gyro.transpose() + R_gyro;
 	K_gyro = P_gyro*H_gyro*temp33.inverse();
 	euler += K_gyro*(y_eul - H_gyro*euler);
 	P_gyro = (eye33 - K_gyro*H_gyro)*P_gyro;
-     
+	
+	//------------------------------------Print Data in 500ms Intervals--------------------------------------------------------------
         
      if(millis()-t_print>500)
      {
@@ -335,7 +311,6 @@ void loop() {
        Serial.print("theta=");Serial.println(euler(1)*180/PI,4);
        Serial.print("psi=");Serial.println(euler(2)*180/PI,4);
      
-//       Serial.println("GPS Data");
        Serial.print("lat=");Serial.println(flat,8);
        Serial.print("lon=");Serial.println(flon,8);
        Serial.print("alt=");Serial.println(falt,8);
@@ -347,7 +322,6 @@ void loop() {
        Serial2.print("theta=");Serial2.println(euler(1)*180/PI,4);
        Serial2.print("psi=");Serial2.println(euler(2)*180/PI,4);
      
-//       Serial.println("GPS Data");
        Serial2.print("lat=");Serial2.println(flat,8);
        Serial2.print("lon=");Serial2.println(flon,8);
        Serial2.print("alt=");Serial2.println(falt,8);
