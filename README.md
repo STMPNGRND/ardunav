@@ -8,8 +8,7 @@ An extremely low-cost, simple and yet accurate tool to create your own AHRS and 
 The project aims at building an AHRS for under $100 including the Arduino board, sensors and required hardware. 
 
 The Firmware utilizes Eigen 3 Library for Matrix Computations and Kalman Filtering.
-
-A complete working video of the ardunav can be viewed online at https://www.youtube.com/watch?v=txDWA1ZpQMc&feature=youtu.be
+[![ScreenShot](https://raw.github.com/GabLeRoux/WebMole/master/ressources/WebMole_Youtube_Video.png)](https://www.youtube.com/watch?v=txDWA1ZpQMc&feature=youtu.be)
 
 ACKNOWLEDGEMENTS:
 
