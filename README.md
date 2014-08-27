@@ -9,9 +9,7 @@ The project aims at building an AHRS for under $100 including the Arduino board,
 
 The Firmware utilizes Eigen 3 Library for Matrix Computations and Kalman Filtering.
 
-<video src="https://www.youtube.com/watch?v=txDWA1ZpQMc&feature=youtu.be" poster="poster.jpg" width="320" height="200" controls preload></video>
-
-[![ScreenShot](https://raw.github.com/GabLeRoux/WebMole/master/ressources/WebMole_Youtube_Video.png)](https://www.youtube.com/watch?v=txDWA1ZpQMc&feature=youtu.be)
+[![ScreenShot](http://dailyemerald.com/wp-content/uploads/2011/12/blank-screen-1.png)](https://www.youtube.com/watch?v=txDWA1ZpQMc&feature=youtu.be)
 
 ACKNOWLEDGEMENTS:
 
