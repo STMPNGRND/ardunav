@@ -15,6 +15,6 @@ ACKNOWLEDGEMENTS:
 
 I would like to thank Jeff Rowberg for sharing the Arduino source code for MPU6050 and HMC5883L using the I2CDev Library, Mikal Hart for building the TinyGPS library and Hazim Bitar for sharing the code on programming the HC-05 bluetooth module.
 
-I would like to thank Prof. Demoz-Gebre Egziabher, Department of Aerospace Engineering, University of Minnesota and Mr. Brian Taylor, Director, UAV Lab, University of Minnesota for taking the course AEM 5333, Design to Flight:UAV which culminated in the development of Ardunav.
+I would like to thank Prof. Demoz-Gebre Egziabher, Department of Aerospace Engineering, University of Minnesota and Mr. Brian Taylor, Director, UAV Lab, University of Minnesota for teaching me the course AEM 5333, Design to Flight:UAV which culminated in the development of Ardunav.
 
 I would finally like to thank my faculty advisor, Prof. Perry Li, Department of Mechanical Engineering, University of Minnesota for guiding me in the field of vision guided inertial navigation.
